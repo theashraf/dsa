@@ -38,17 +38,17 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     this.s = 0;
   }
   // O(1)
-  first() {
+  first(): T {
     if (this.isEmpty()) return null;
     else return this.head.getData();
   }
   // O(1)
-  last() {
+  last(): T {
     if (this.isEmpty()) return null;
     else return this.tail.getData();
   }
   // O(1)
-  addFirst(data: T) {
+  addFirst(data: T): void {
     let newNode: Node<T> = new Node(data, null, null);
     if (this.isEmpty()) this.head = this.tail = newNode;
     else {
@@ -59,7 +59,7 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     ++this.s;
   }
   // O(1)
-  addLast(data: T) {
+  addLast(data: T): void {
     let newNode: Node<T> = new Node(data, null, null);
     if (this.isEmpty()) this.head = this.tail = newNode;
     else {
@@ -70,7 +70,7 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     ++this.s;
   }
   // O(1)
-  removeFirst() {
+  removeFirst(): T {
     if (this.isEmpty()) return null;
     else if (this.s === 1) {
       let data = this.head.getData();
@@ -86,10 +86,10 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     }
   }
   // O(1)
-  removeLast() {
+  removeLast(): T {
     if (this.isEmpty()) return null;
     else if (this.s === 1) {
-      let data = this.tail.getData();
+      const data: T = this.tail.getData();
       this.head = this.tail = null;
       --this.s;
       return data;
@@ -111,19 +111,19 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
       for (let i = 0; i < index - 1; ++i) {
         current = current.getNext();
       }
-      let newNode: Node<T> = new Node(data, current.getNext(), current);
+      const newNode: Node<T> = new Node(data, current.getNext(), current);
       current.getNext().setPrev(newNode);
       current.setNext(newNode);
       ++this.s;
     }
   }
   // O(n)
-  remove(index) {
+  remove(index): T {
     if (index < 0 || index >= this.size()) throw "Invalid Index";
     else if (index === 0) return this.removeFirst();
     else if (index === this.size() - 1) return this.removeLast();
     else {
-      let current = this.head;
+      let current: Node<T> = this.head;
       for (let i = 0; i < index; ++i) {
         current = current.getNext();
       }
@@ -147,10 +147,10 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
       return current.getData();
     }
   }
-  isEmpty() {
+  isEmpty(): boolean {
     return this.s === 0;
   }
-  size() {
+  size(): number {
     return this.s;
   }
 }
