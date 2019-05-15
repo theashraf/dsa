@@ -4,7 +4,7 @@ export default interface LinkedList<T> {
   addFirst(data: T): void;
   addLast(data: T): void;
   removeFirst(): T;
-  removeLast(): T | null;
+  removeLast?(): T | null;
   isEmpty(): boolean;
   size(): number;
 

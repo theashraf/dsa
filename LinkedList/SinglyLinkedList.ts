@@ -1,12 +1,10 @@
 import LinkedList from "./LinkedList";
 class Node<E> {
-  private data: E;
-  private next: Node<E>;
-  constructor(data: E, next: Node<E> | null) {
+  constructor(private data: E, private next: Node<E> | null) {
     this.data = data;
     this.next = next;
   }
-  public getData(): E {
+  getData(): E {
     return this.data;
   }
   setData(data: E) {
@@ -74,25 +72,6 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
     }
   }
 
-  // O(n)
-  removeLast() {
-    if (this.isEmpty()) return null;
-    else {
-      let data: E = this.tail.getData();
-      if (this.size() === 1) this.tail = this.head = null;
-      else {
-        let current: Node<E> = this.head;
-        for (let i = 0; i < this.size() - 2; ++i) {
-          current = current.getNext();
-        }
-        data = current.getNext().getData();
-        current.setNext(null);
-        this.tail = current;
-      }
-      return data;
-    }
-  }
-
   add(index: number, data: E) {
     if (index < 0 || index > this.size()) throw "Invalid Index";
     else if (index === 0) this.addFirst(data);
@@ -111,8 +90,6 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
     if (index < 0 || index >= this.size()) throw "Invalid Index";
     else if (index === 0) {
       return this.removeFirst();
-    } else if (index === this.size() - 1) {
-      return this.removeLast();
     } else {
       let current: Node<E> = this.head;
       for (let i = 0; i < index - 1; ++i) {
@@ -120,6 +97,7 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
       }
       let data: E = current.getNext().getData();
       current.setNext(current.getNext().getNext());
+      --this.s;
       return data;
     }
   }

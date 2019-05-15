@@ -9,6 +9,7 @@ export default class ArrayStack<T> implements Stack<T> {
     this.t = -1;
     this.s = 0;
   }
+  // O(1)
   push(data: T) {
     if (this.isFull()) throw "Stack is full";
     else {
@@ -16,6 +17,7 @@ export default class ArrayStack<T> implements Stack<T> {
       ++this.s;
     }
   }
+  // O(1)
   pop(): T {
     if (this.isEmpty()) return null;
     else {
@@ -24,6 +26,7 @@ export default class ArrayStack<T> implements Stack<T> {
       return data;
     }
   }
+  // O(1)
   top(): T {
     if (this.isEmpty()) return null;
     else {
@@ -31,12 +34,15 @@ export default class ArrayStack<T> implements Stack<T> {
       return data;
     }
   }
+  // O(1)
   size(): number {
     return this.s;
   }
+  // O(1)
   isEmpty(): boolean {
     return this.s === 0;
   }
+  // O(1)
   private isFull(): boolean {
     return this.s === this.array.length;
   }
