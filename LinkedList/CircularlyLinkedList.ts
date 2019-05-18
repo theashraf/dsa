@@ -20,7 +20,7 @@ class Node<E> {
     this.next = next;
   }
 }
-export default class CircularLinkedList<T> implements LinkedList<T> {
+export default class CircularlyLinkedList<T> implements LinkedList<T> {
   private s: number;
   private tail: Node<T>;
 
