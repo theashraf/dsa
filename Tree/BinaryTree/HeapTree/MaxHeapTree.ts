@@ -9,7 +9,7 @@ item1 < item2 return -1;
 
 type CompareFunction<T> = (item1: T, item2: T) => number;
 
-export class MaxHeapTree<T> implements HeapTree<T> {
+export default class MaxHeapTree<T> implements HeapTree<T> {
   private tree: ArrayList<T>;
   private compareTo: CompareFunction<T>;
 
@@ -149,27 +149,27 @@ export class MaxHeapTree<T> implements HeapTree<T> {
   }
 }
 
-const compareTo = (num1: number, num2: number): number => {
-  if (num1 > num2) return 1;
-  else if (num1 === num2) return 0;
-  else {
-    return -1;
-  }
-};
+// const compareTo = (num1: number, num2: number): number => {
+//   if (num1 > num2) return 1;
+//   else if (num1 === num2) return 0;
+//   else {
+//     return -1;
+//   }
+// };
 
-const tree: HeapTree<number> = new MaxHeapTree<number>(compareTo);
+// const tree: HeapTree<number> = new MaxHeapTree<number>(compareTo);
 
-tree.add(10);
-tree.add(20);
-tree.add(1);
-tree.add(2);
-tree.add(200);
+// tree.add(10);
+// tree.add(20);
+// tree.add(1);
+// tree.add(2);
+// tree.add(200);
 
-tree.add(10);
-tree.add(20);
-tree.add(1);
-tree.add(2);
-tree.add(200);
+// tree.add(10);
+// tree.add(20);
+// tree.add(1);
+// tree.add(2);
+// tree.add(200);
 
 // console.log(tree.root()); // 200
 // console.log(tree.remove()); // 200
@@ -189,6 +189,6 @@ tree.add(200);
 // console.log(tree.root()); // 10
 // console.log(tree.remove()); // 10
 
-while (!tree.isEmpty()) {
-  console.log(tree.remove());
-}
+// while (!tree.isEmpty()) {
+//   console.log(tree.remove());
+// }

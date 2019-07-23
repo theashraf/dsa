@@ -14,12 +14,12 @@ abstract class ArrayList<T> implements List<T> {
   abstract add(index: number, data: T): void;
   abstract remove(index: number): T;
 
-  get capacity(): number {
+  capacity(): number {
     return this.array.length;
   }
   // O(1)
   get(index: number): T {
-    if (index < 0 || index >= this.size()) throw "Invalid Index";
+    if (index < 0 || index >= this.size()) throw "Get: Invalid Index";
     return this.array[index];
   }
   // O(1)
@@ -83,7 +83,7 @@ export class DynamicArrayList<T> extends ArrayList<T> {
 
   // O(n)
   add(index: number, data: T): void {
-    if (index < 0 || index > this.size()) throw "Invalid Index";
+    if (index < 0 || index > this.size()) throw "Add: Invalid Index";
     if (this.isFull()) this.resize();
     for (let i = this.size() - 1; i >= index; --i) {
       this.array[i + 1] = this.array[i];
@@ -94,7 +94,7 @@ export class DynamicArrayList<T> extends ArrayList<T> {
 
   // O(n)
   remove(index: number): T {
-    if (index < 0 || index >= this.size()) throw "Invalid Index";
+    if (index < 0 || index >= this.size()) throw "Remove: Invalid Index";
     let temp: T = this.array[index];
 
     for (let i = index; i < this.size() - 1; ++i) {
@@ -109,7 +109,7 @@ export class DynamicArrayList<T> extends ArrayList<T> {
 
   // O(1)
   set(index: number, data: T): T {
-    if (index < 0 || index >= this.size()) throw "Invalid Index";
+    if (index < 0 || index >= this.size()) throw "Set: Invalid Index";
     let temp: T = this.array[index];
     this.array[index] = data;
     return temp;
