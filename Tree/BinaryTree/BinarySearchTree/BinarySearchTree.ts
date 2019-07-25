@@ -4,7 +4,7 @@ interface BinarySearchTree<T> {
   delete(value: T): boolean;
   min(): T;
   max(): T;
-  height?(): number;
+  height(): number;
   size(): number;
   isEmpty(): boolean;
 }
@@ -216,6 +216,16 @@ export default class BST<T> implements BinarySearchTree<T> {
     return true;
   }
 
+  private getHeight(node: Node<T>): number {
+    if (!node) return -1;
+    return 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));
+  }
+
+  height(): number {
+    if (!this.root) return 0;
+    return this.getHeight(this.root);
+  }
+
   size() {
     return this.s;
   }
@@ -247,3 +257,4 @@ console.log(t.min());
 
 console.log(t.size());
 console.log(t.search(14));
+console.log(t.height());
