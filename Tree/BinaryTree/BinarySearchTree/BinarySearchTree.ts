@@ -1,3 +1,6 @@
+import Queue from "../../../Queue/Queue";
+import ArrayListQueue from "../../../Queue/ArrayListQueue";
+
 interface BinarySearchTree<T> {
   insert(data: T): void;
   search(value: T): boolean;
@@ -7,6 +10,8 @@ interface BinarySearchTree<T> {
   height(): number;
   size(): number;
   isEmpty(): boolean;
+  BFT(): void;
+  DFT(type: "preOrder" | "inOrder" | "postOrder"): void;
 }
 
 class Node<T> {
@@ -233,6 +238,67 @@ export default class BST<T> implements BinarySearchTree<T> {
   isEmpty() {
     return this.s === 0;
   }
+
+  BFT() {
+    let q: Queue<Node<T>> = new ArrayListQueue<Node<T>>();
+
+    q.enqueue(this.root);
+
+    let current: Node<T> = null;
+
+    while (!q.isEmpty()) {
+      current = q.dequeue();
+      console.log(current.data);
+
+      if (current.left) {
+        q.enqueue(current.left);
+      }
+
+      if (current.right) {
+        q.enqueue(current.right);
+      }
+    }
+  }
+
+  // root,left,right
+  private preOrder(node: Node<T>) {
+    if (!node) return;
+    console.log(node.data);
+    this.preOrder(node.left);
+    this.preOrder(node.right);
+  }
+
+  // left,root,right
+  private inOrder(node: Node<T>) {
+    if (!node) return;
+    this.inOrder(node.left);
+    console.log(node.data);
+    this.inOrder(node.right);
+  }
+
+  // left,right,root
+  private postOrder(node: Node<T>) {
+    if (!node) return;
+    this.postOrder(node.left);
+    this.postOrder(node.right);
+    console.log(node.data);
+  }
+
+  DFT(type: String) {
+    switch (type) {
+      case "preOrder":
+        this.preOrder(this.root);
+        break;
+      case "inOrder":
+        this.inOrder(this.root);
+        break;
+      case "postOrder":
+        this.postOrder(this.root);
+        break;
+      default:
+        break;
+    }
+  }
 }
 
 const t: BinarySearchTree<number> = new BST<number>();
@@ -258,3 +324,5 @@ console.log(t.min());
 console.log(t.size());
 console.log(t.search(14));
 console.log(t.height());
+
+t.DFT("inOrder");
