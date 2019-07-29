@@ -4,7 +4,7 @@ import ArrayListQueue from "../../../Queue/ArrayListQueue";
 interface BinarySearchTree<T> {
   insert(data: T): void;
   search(value: T): boolean;
-  delete(value: T): boolean;
+  delete(value: T): void;
   min(): T;
   max(): T;
   height(): number;
@@ -216,9 +216,90 @@ export default class BST<T> implements BinarySearchTree<T> {
     }
   }
 
-  //TODO:
-  delete(value: T): boolean {
-    return true;
+  private hasLeft(node: Node<T>): boolean {
+    return !!node.left;
+  }
+
+  private hasRight(node: Node<T>): boolean {
+    return !!node.right;
+  }
+
+  private findMin(node: Node<T>): Node<T> {
+    if (node.left) return this.findMin(node.left);
+    return node;
+  }
+
+  delete(value: T): void {
+    // if tree is empty
+    if (!this.root) return;
+    // search for the node which has this value
+    let current: Node<T> = this.root;
+    let parent: Node<T> = null;
+
+    while (current && current.data !== value) {
+      parent = current;
+
+      if (value > current.data) {
+        current = current.right;
+      } else if (value < current.data) {
+        current = current.left;
+      }
+    }
+
+    // console.log(current);
+    // console.log(parent);
+
+    // not found
+    if (!current) return;
+
+    // if we found it
+    // check if it has no child
+    if (!current.left && !current.right) {
+      if (parent.data > current.data) {
+        parent.left = null;
+      } else {
+        parent.right = null;
+      }
+    }
+    // make its parent point to null
+    // check if it has one child
+    else if (!current.left && current.right) {
+      if (parent.data > current.data) {
+        parent.left = current.right;
+      } else {
+        parent.right = current.right;
+      }
+    } else if (current.left && !current.right) {
+      if (parent.data > current.data) {
+        parent.left = current.left;
+      } else {
+        parent.right = current.left;
+      }
+    }
+    // make its child the child of its parent
+    // check if it has two child
+    else {
+      // find min value node in the right sub tree
+      let minRight: Node<T> = current.right;
+      let minRightParent: Node<T> = current;
+
+      while (this.hasLeft(minRight)) {
+        minRightParent = minRight;
+        minRight = minRight.left;
+      }
+
+      // console.log(minRight, " min right sub tree");
+
+      // replace it's value with it
+      current.data = minRight.data;
+
+      // delete min right node
+      if (minRightParent === current) {
+        current.right = minRight.right;
+      } else {
+        minRightParent.left = minRight.right;
+      }
+    }
   }
 
   private getHeight(node: Node<T>): number {
@@ -303,26 +384,33 @@ export default class BST<T> implements BinarySearchTree<T> {
 
 const t: BinarySearchTree<number> = new BST<number>();
 
-t.insert(1);
-t.insert(2);
-t.insert(3);
-t.insert(4);
-t.insert(5);
-t.insert(6);
-t.insert(7);
-t.insert(8);
-t.insert(9);
-t.insert(10);
-t.insert(11);
 t.insert(12);
+t.insert(5);
+t.insert(15);
+t.insert(3);
+t.insert(7);
 t.insert(13);
-t.insert(14);
+t.insert(17);
+t.insert(1);
+t.insert(9);
+t.insert(4);
 
-console.log(t.max());
-console.log(t.min());
+// console.log(t.max());
+// console.log(t.min());
 
-console.log(t.size());
-console.log(t.search(14));
-console.log(t.height());
+// console.log(t.size());
+// console.log(t.search(14));
+// console.log(t.height());
 
-t.DFT("inOrder");
+// t.DFT("inOrder");
+t.BFT();
+
+// console.log("-----");
+
+t.delete(3);
+
+console.log("-----");
+
+t.BFT();
+
+// t.DFT("inOrder");
