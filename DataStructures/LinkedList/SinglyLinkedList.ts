@@ -127,4 +127,75 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
   isEmpty() {
     return this.s === 0;
   }
+
+  private printNode(node: Node<E>) {
+    if (!node) return;
+
+    console.log(node.getData());
+
+    this.printNode(node.getNext());
+  }
+  print() {
+    if (this.isEmpty()) return;
+
+    this.printNode(this.head);
+  }
+
+  printIteratively() {
+    if (this.isEmpty()) return;
+
+    let current: Node<E> = this.head;
+    while (current) {
+      console.log(current.getData());
+      current = current.getNext();
+    }
+  }
+
+  private reversedPrintNode(node: Node<E>) {
+    if (!node) return;
+
+    this.reversedPrintNode(node.getNext());
+
+    console.log(node.getData());
+  }
+  reversedPrint() {
+    if (this.isEmpty()) return;
+
+    this.reversedPrintNode(this.head);
+  }
+
+  private reverseList(node: Node<E>) {
+    if (!node.getNext()) {
+      this.head = node;
+      return;
+    }
+
+    this.reverseList(node.getNext());
+
+    let nxt: Node<E> = node.getNext();
+    nxt.setNext(node);
+    node.setNext(null);
+  }
+  reverse() {
+    if (this.isEmpty()) return;
+
+    this.reverseList(this.head);
+  }
+
+  reverseIteratively() {
+    if (this.isEmpty()) return;
+
+    let current: Node<E> = this.head;
+    let prev = null;
+    let temp = null;
+
+    while (current) {
+      temp = current.getNext();
+      current.setNext(prev);
+      prev = current;
+      current = temp;
+    }
+
+    this.head = prev;
+  }
 }
