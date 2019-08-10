@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "target": "esnext"
+    "target": "esnext",
+    "types": ["node"]
   }
 }
