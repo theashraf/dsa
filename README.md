@@ -1,1 +1,9 @@
-> Data Structures and Algorithms implemented in Typescript
+> Common data structures and algorithms implemented in Typescript
+
+
+
+## Development
+```sh
+- npm install
+- npm run test
+```
