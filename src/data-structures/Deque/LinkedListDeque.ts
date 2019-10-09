@@ -1,51 +1,51 @@
-import Deque from "./Deque";
-import LinkedList from "../../interfaces/LinkedList";
-import DoublyLinkedList from "../LinkedList/DoublyLinkedList";
+import Deque from '../../interfaces/Deque'
+import LinkedList from '../../interfaces/LinkedList'
+import DoublyLinkedList from '../LinkedList/DoublyLinkedList'
 
 export default class LinkedListDeque<T> implements Deque<T> {
-  private list: LinkedList<T>;
+  private list: LinkedList<T>
 
   constructor() {
-    this.list = new DoublyLinkedList();
+    this.list = new DoublyLinkedList()
   }
 
   // O(1)
-  addFirst(data: T) {
-    this.list.addFirst(data);
+  addFirst(data: T): void {
+    this.list.addFirst(data)
   }
 
   // O(1)
-  addLast(data: T) {
-    this.list.addLast(data);
+  addLast(data: T): void {
+    this.list.addLast(data)
   }
 
   // O(1)
-  removeFirst() {
-    return this.list.removeFirst();
+  removeFirst(): T {
+    return this.list.removeFirst()
   }
 
   // O(1)
-  removeLast() {
-    return this.list.removeLast();
+  removeLast(): T {
+    return this.list.removeLast()
   }
 
   // O(1)
-  first() {
-    return this.list.first();
+  first(): T {
+    return this.list.first()
   }
 
   // O(1)
-  last() {
-    return this.list.last();
+  last(): T {
+    return this.list.last()
   }
 
   // O(1)
-  size() {
-    return this.list.size();
+  size(): number {
+    return this.list.size()
   }
 
   // O(1)
-  isEmpty() {
-    return this.list.isEmpty();
+  isEmpty(): boolean {
+    return this.list.isEmpty()
   }
 }

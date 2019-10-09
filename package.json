@@ -4,7 +4,12 @@
   "description": "> Data Structures and Algorithms implemented in Typescript",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "compile": "tsc",
+    "lint": "eslint src/ --ext ts",
+    "format": "prettier --write \"**/*.+(ts|js|md|json)\"",
+    "commit": "git-cz"
   },
   "repository": {
     "type": "git",
@@ -18,8 +23,20 @@
   },
   "homepage": "https://github.com/theashraf/dsa#readme",
   "devDependencies": {
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.3.3",
+    "@typescript-eslint/parser": "^2.3.3",
+    "codecov": "^3.6.1",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.4.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "git-cz": "^3.2.1",
+    "husky": "^3.0.8",
     "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
   }

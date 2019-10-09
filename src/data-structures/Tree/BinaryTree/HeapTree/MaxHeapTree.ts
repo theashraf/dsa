@@ -1,5 +1,5 @@
-import HeapTree from "./HeapTree";
-import ArrayList from "../../../List/ArrayList";
+import HeapTree from './HeapTree'
+import ArrayList from '../../../List/ArrayList'
 
 /*
 item1 > item2 return 1;
@@ -7,145 +7,139 @@ item1 == item2 return 0;
 item1 < item2 return -1;
 */
 
-type CompareFunction<T> = (item1: T, item2: T) => number;
+type CompareFunction<T> = (item1: T, item2: T) => number
 
 export default class MaxHeapTree<T> implements HeapTree<T> {
-  private tree: ArrayList<T>;
-  private compareTo: CompareFunction<T>;
+  private tree: ArrayList<T>
+  private compareTo: CompareFunction<T>
 
   constructor(compareTo: CompareFunction<T>) {
-    this.tree = new ArrayList();
-    this.compareTo = compareTo;
+    this.tree = new ArrayList()
+    this.compareTo = compareTo
   }
 
   private getParentIndex(i: number): number {
-    return Math.floor((i - 1) / 2);
+    return Math.floor((i - 1) / 2)
   }
 
   private getLeftChildIndex(i: number): number {
-    return 2 * i + 1;
+    return 2 * i + 1
   }
 
   private getRightChildIndex(i: number): number {
-    return 2 * i + 2;
+    return 2 * i + 2
   }
 
   private hasRightChild(i: number): boolean {
-    if (this.getRightChildIndex(i) >= this.tree.size()) return false;
-    return true;
+    if (this.getRightChildIndex(i) >= this.tree.size()) return false
+    return true
   }
 
   private hasLeftChild(i: number): boolean {
-    if (this.getLeftChildIndex(i) >= this.tree.size()) return false;
-    return true;
+    if (this.getLeftChildIndex(i) >= this.tree.size()) return false
+    return true
   }
 
   private hasChildren(i: number): boolean {
-    return this.hasLeftChild(i) || this.hasRightChild(i);
+    return this.hasLeftChild(i) || this.hasRightChild(i)
   }
 
   private getMaxChildIndex(i: number): number {
-    if (!this.hasChildren(i))
-      throw new Error("This Node doesn't have any Children");
+    if (!this.hasChildren(i)) throw new Error("This Node doesn't have any Children")
 
     if (this.hasLeftChild(i) && this.hasRightChild(i)) {
       // return the max child index
-      let leftChildIndex = this.getLeftChildIndex(i);
-      let rightChildIndex = this.getRightChildIndex(i);
+      const leftChildIndex = this.getLeftChildIndex(i)
+      const rightChildIndex = this.getRightChildIndex(i)
 
-      return this.tree.get(rightChildIndex) > this.tree.get(leftChildIndex)
-        ? rightChildIndex
-        : leftChildIndex;
+      return this.tree.get(rightChildIndex) > this.tree.get(leftChildIndex) ? rightChildIndex : leftChildIndex
     } else if (this.hasLeftChild(i) && !this.hasRightChild(i)) {
-      return this.getLeftChildIndex(i);
+      return this.getLeftChildIndex(i)
     } else {
-      return this.getRightChildIndex(i);
+      return this.getRightChildIndex(i)
     }
   }
 
   private swap(i1: number, i2: number): void {
-    let temp = this.tree.get(i1);
+    const temp = this.tree.get(i1)
 
-    this.tree.set(i1, this.tree.get(i2));
+    this.tree.set(i1, this.tree.get(i2))
 
-    this.tree.set(i2, temp);
+    this.tree.set(i2, temp)
   }
 
   private isRoot(i: number): boolean {
-    return i === 0;
+    return i === 0
   }
 
   private heapifyUp() {
-    if (this.tree.size() === 1) return;
+    if (this.tree.size() === 1) return
 
-    let i = this.tree.size() - 1;
-    let parentIndex = this.getParentIndex(i);
+    let i = this.tree.size() - 1
+    let parentIndex = this.getParentIndex(i)
 
     while (
       !this.isRoot(i) &&
       this.compareTo(this.tree.get(i), this.tree.get(parentIndex)) === 1 // i > parentIndex -> for max heap tree
     ) {
-      this.swap(i, parentIndex);
+      this.swap(i, parentIndex)
 
-      i = parentIndex;
-      parentIndex = this.getParentIndex(i);
+      i = parentIndex
+      parentIndex = this.getParentIndex(i)
     }
   }
 
   private heapifyDown() {
-    if (this.tree.size() === 1) return;
+    if (this.tree.size() === 1) return
 
-    let i = 0;
+    let i = 0
 
     while (
       this.hasChildren(i) &&
-      this.compareTo(
-        this.tree.get(i),
-        this.tree.get(this.getMaxChildIndex(i))
-      ) === -1 //  child index > i -> for max heap tree
+      this.compareTo(this.tree.get(i), this.tree.get(this.getMaxChildIndex(i))) === -1 //  child index > i -> for max heap tree
     ) {
-      const currentIndex = this.getMaxChildIndex(i);
-      this.swap(i, currentIndex);
-      i = currentIndex;
+      const currentIndex = this.getMaxChildIndex(i)
+      this.swap(i, currentIndex)
+      i = currentIndex
     }
   }
 
   // O(log N)
   add(data: T) {
-    this.tree.add(this.tree.size(), data);
-    this.heapifyUp();
+    this.tree.add(this.tree.size(), data)
+    this.heapifyUp()
   }
 
   // O(log N)
   remove(): T {
     // if tree is empty throw error
-    if (this.tree.isEmpty()) throw new Error("Can't remove from an empty Tree");
+    if (this.tree.isEmpty()) throw new Error("Can't remove from an empty Tree")
 
     // if there is only one element in tree / remove it
-    if (this.tree.size() === 1) return this.tree.remove(0);
+    if (this.tree.size() === 1) return this.tree.remove(0)
 
     // remove last element in tree
-    let last = this.tree.remove(this.tree.size() - 1);
+    const last = this.tree.remove(this.tree.size() - 1)
     // replace last element with the root
-    let ret = this.tree.set(0, last);
+    const ret = this.tree.set(0, last)
 
-    this.heapifyDown();
+    this.heapifyDown()
 
-    return ret;
+    return ret
   }
 
   root(): T {
-    if (this.tree.size() === 0) throw new Error("Tree is Empty");
+    if (this.tree.size() === 0) throw new Error('Tree is Empty')
 
-    return this.tree.get(0);
+    return this.tree.get(0)
   }
 
   size(): number {
-    return this.tree.size();
+    return this.tree.size()
   }
 
   isEmpty(): boolean {
-    return this.tree.isEmpty();
+    return this.tree.isEmpty()
   }
 }
 
