@@ -1,54 +1,49 @@
-class Node<T> {
-  private data: T
-  private next: Node<T>
-  private prev: Node<T>
-
-  constructor(data: T, next: Node<T> | null, prev: Node<T> | null) {
+'use strict'
+exports.__esModule = true
+var Node = /** @class */ (function() {
+  function Node(data, next, prev) {
     this.data = data
     this.next = next
     this.prev = prev
   }
-  public getData(): T {
+  Node.prototype.getData = function() {
     return this.data
   }
-  setData(data: T) {
+  Node.prototype.setData = function(data) {
     this.data = data
   }
-  getNext(): Node<T> {
+  Node.prototype.getNext = function() {
     return this.next
   }
-  setNext(next: Node<T>) {
+  Node.prototype.setNext = function(next) {
     this.next = next
   }
-  getPrev(): Node<T> {
+  Node.prototype.getPrev = function() {
     return this.prev
   }
-  setPrev(prev: Node<T>) {
+  Node.prototype.setPrev = function(prev) {
     this.prev = prev
   }
-}
-
-export default class DoublyLinkedList<T> implements LinkedList<T> {
-  private head: Node<T>
-  private tail: Node<T>
-  private s: number
-  constructor() {
+  return Node
+})()
+var DoublyLinkedList = /** @class */ (function() {
+  function DoublyLinkedList() {
     this.head = this.tail = null
     this.s = 0
   }
   // O(1)
-  first(): T {
+  DoublyLinkedList.prototype.first = function() {
     if (this.isEmpty()) return null
     else return this.head.getData()
   }
   // O(1)
-  last(): T {
+  DoublyLinkedList.prototype.last = function() {
     if (this.isEmpty()) return null
     else return this.tail.getData()
   }
   // O(1)
-  addFirst(data: T): void {
-    const newNode: Node<T> = new Node(data, null, null)
+  DoublyLinkedList.prototype.addFirst = function(data) {
+    var newNode = new Node(data, null, null)
     if (this.isEmpty()) this.head = this.tail = newNode
     else {
       newNode.setNext(this.head)
@@ -58,8 +53,8 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     ++this.s
   }
   // O(1)
-  addLast(data: T): void {
-    const newNode: Node<T> = new Node(data, null, null)
+  DoublyLinkedList.prototype.addLast = function(data) {
+    var newNode = new Node(data, null, null)
     if (this.isEmpty()) this.head = this.tail = newNode
     else {
       this.tail.setNext(newNode)
@@ -69,15 +64,15 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     ++this.s
   }
   // O(1)
-  removeFirst(): T {
+  DoublyLinkedList.prototype.removeFirst = function() {
     if (this.isEmpty()) return null
     else if (this.s === 1) {
-      const data = this.head.getData()
+      var data = this.head.getData()
       this.head = this.tail = null
       --this.s
       return data
     } else {
-      const data = this.head.getData()
+      var data = this.head.getData()
       this.head = this.head.getNext()
       this.head.setPrev(null)
       --this.s
@@ -85,15 +80,15 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     }
   }
   // O(1)
-  removeLast(): T {
+  DoublyLinkedList.prototype.removeLast = function() {
     if (this.isEmpty()) return null
     else if (this.s === 1) {
-      const data: T = this.tail.getData()
+      var data = this.tail.getData()
       this.head = this.tail = null
       --this.s
       return data
     } else {
-      const data = this.tail.getData()
+      var data = this.tail.getData()
       this.tail = this.tail.getPrev()
       this.tail.setNext(null)
       --this.s
@@ -101,32 +96,32 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     }
   }
   // O(n)
-  add(index: number, data: T) {
+  DoublyLinkedList.prototype.add = function(index, data) {
     if (index < 0 || index > this.size()) throw 'Invalid Index'
     else if (index === 0) this.addFirst(data)
     else if (index === this.size()) this.addLast(data)
     else {
-      let current = this.head
-      for (let i = 0; i < index - 1; ++i) {
+      var current = this.head
+      for (var i = 0; i < index - 1; ++i) {
         current = current.getNext()
       }
-      const newNode: Node<T> = new Node(data, current.getNext(), current)
+      var newNode = new Node(data, current.getNext(), current)
       current.getNext().setPrev(newNode)
       current.setNext(newNode)
       ++this.s
     }
   }
   // O(n)
-  remove(index: number): T {
+  DoublyLinkedList.prototype.remove = function(index) {
     if (index < 0 || index >= this.size()) throw 'Invalid Index'
     else if (index === 0) return this.removeFirst()
     else if (index === this.size() - 1) return this.removeLast()
     else {
-      let current: Node<T> = this.head
-      for (let i = 0; i < index; ++i) {
+      var current = this.head
+      for (var i = 0; i < index; ++i) {
         current = current.getNext()
       }
-      const data: T = current.getData()
+      var data = current.getData()
       current.getNext().setPrev(current.getPrev())
       current.getPrev().setNext(current.getNext())
       --this.s
@@ -134,22 +129,24 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     }
   }
   // O(n)
-  get(index: number): T {
+  DoublyLinkedList.prototype.get = function(index) {
     if (index < 0 || index >= this.size()) throw 'Invalid Index'
     else if (index === 0) return this.first()
     else if (index === this.size() - 1) return this.last()
     else {
-      let current: Node<T> = this.head
-      for (let i = 0; i < index; ++i) {
+      var current = this.head
+      for (var i = 0; i < index; ++i) {
         current = current.getNext()
       }
       return current.getData()
     }
   }
-  isEmpty(): boolean {
+  DoublyLinkedList.prototype.isEmpty = function() {
     return this.s === 0
   }
-  size(): number {
+  DoublyLinkedList.prototype.size = function() {
     return this.s
   }
-}
+  return DoublyLinkedList
+})()
+exports['default'] = DoublyLinkedList

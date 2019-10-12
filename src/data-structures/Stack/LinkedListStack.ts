@@ -1,6 +1,4 @@
-import Stack from '../../interfaces/Stack'
-import LinkedList from '../../interfaces/LinkedList'
-import SinglyLinkedList from '../LinkedList/SinglyLinkedList'
+import SinglyLinkedList from 'data-structures/LinkedList/SinglyLinkedList'
 
 export default class LinkedListStack<T> implements Stack<T> {
   private _linkedList: LinkedList<T>

@@ -1,4 +1,3 @@
-import Deque from '../../interfaces/Deque'
 import ArrayList from '../List/ArrayList'
 
 export default class ArrayListDeque<T> implements Deque<T> {

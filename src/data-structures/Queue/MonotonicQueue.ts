@@ -1,6 +1,4 @@
-import Queue from './Queue'
 import LinkedListQueue from './LinkedListQueue'
-import Deque from '../Deque/Deque'
 import LinkedListDeque from '../Deque/LinkedListDeque'
 
 export default class MonotonicQueue implements Queue<number> {

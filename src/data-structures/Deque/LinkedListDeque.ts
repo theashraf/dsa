@@ -1,5 +1,3 @@
-import Deque from '../../interfaces/Deque'
-import LinkedList from '../../interfaces/LinkedList'
 import DoublyLinkedList from '../LinkedList/DoublyLinkedList'
 
 export default class LinkedListDeque<T> implements Deque<T> {

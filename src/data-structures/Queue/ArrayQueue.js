@@ -1,47 +1,41 @@
-export default class ArrayQueue<T> implements Queue<T> {
-  private s: number // size
-  private array: Array<T>
-  private f: number // first
-
-  constructor(size: number) {
+'use strict'
+exports.__esModule = true
+var ArrayQueue = /** @class */ (function() {
+  function ArrayQueue(size) {
     this.s = 0
     this.f = 0
     this.array = Array(size)
   }
-
   // O(1)
-  enqueue(data: T) {
+  ArrayQueue.prototype.enqueue = function(data) {
     if (this.isFull()) throw 'Queue is full'
     this.array[(this.f + this.s++) % this.array.length] = data
   }
-
   // O(1)
-  dequeue(): T {
+  ArrayQueue.prototype.dequeue = function() {
     if (this.isEmpty()) return null
-    const data: T = this.array[this.f]
+    var data = this.array[this.f]
     this.f = (this.f + 1) % this.array.length
     --this.s
     return data
   }
-
   // O(1)
-  first(): T {
+  ArrayQueue.prototype.first = function() {
     if (this.isEmpty()) return null
     return this.array[this.f]
   }
-
   // O(1)
-  isEmpty(): boolean {
+  ArrayQueue.prototype.isEmpty = function() {
     return this.s === 0
   }
-
   // O(1)
-  size(): number {
+  ArrayQueue.prototype.size = function() {
     return this.s
   }
-
   // O(1)
-  private isFull(): boolean {
+  ArrayQueue.prototype.isFull = function() {
     return this.s === this.array.length
   }
-}
+  return ArrayQueue
+})()
+exports['default'] = ArrayQueue

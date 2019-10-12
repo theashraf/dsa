@@ -1,4 +1,3 @@
-import HeapTree from '../../data-structures/Tree/BinaryTree/HeapTree/HeapTree'
 import MaxHeapTree from '../../data-structures/Tree/BinaryTree/HeapTree/MaxHeapTree'
 
 const compareTo = (num1: number, num2: number): number => {

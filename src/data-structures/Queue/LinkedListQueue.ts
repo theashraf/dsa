@@ -1,5 +1,3 @@
-import Queue from './Queue'
-import LinkedList from '../LinkedList/LinkedList'
 import SinglyLinkedList from '../LinkedList/SinglyLinkedList'
 
 export default class LinkedListQueue<T> implements Queue<T> {

@@ -1,5 +1,3 @@
-import Queue from './Queue'
-import HeapTree from '../Tree/BinaryTree/HeapTree/HeapTree'
 import MaxHeapTree from '../Tree/BinaryTree/HeapTree/MaxHeapTree'
 
 type CompareFunction<T> = (item1: T, item2: T) => number

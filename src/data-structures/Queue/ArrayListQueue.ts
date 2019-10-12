@@ -1,4 +1,3 @@
-import Queue from '../../interfaces/Queue'
 import ArrayList from '../List/ArrayList'
 
 export default class ArrayListQueue<T> implements Queue<T> {

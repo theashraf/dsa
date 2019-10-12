@@ -1,5 +1,3 @@
-import Queue from './Queue'
-import Stack from '../Stack/Stack'
 import LinkedListStack from '../Stack/LinkedListStack'
 
 export default class StackQueue<T> implements Queue<T> {
