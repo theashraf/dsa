@@ -14,7 +14,7 @@ export default class MonotonicStack implements Stack<number> {
     this.stack = new LinkedListStack()
   }
 
-  push(data: number) {
+  push(data: number): void {
     this.stack.push(data)
     if (this.maxStack.isEmpty()) this.maxStack.push(data)
     else if (data >= this.maxStack.top()) this.maxStack.push(data)
@@ -43,6 +43,7 @@ export default class MonotonicStack implements Stack<number> {
   }
 }
 
+/*
 // this solution uses O(1) memory for tracking min and max in stack
 class MonotonicStack1 implements Stack<number> {
   private min: number
@@ -55,7 +56,7 @@ class MonotonicStack1 implements Stack<number> {
     this.stack = new LinkedListStack()
   }
 
-  push(data: number) {
+  push(data: number): void {
     if (this.isEmpty()) {
       this.min = data
       this.max = data
@@ -130,3 +131,4 @@ class MonotonicStack1 implements Stack<number> {
     return this.isEmpty() ? null : this.max
   }
 }
+*/

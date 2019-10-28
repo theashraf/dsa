@@ -1,4 +1,4 @@
-import SinglyLinkedList from 'data-structures/LinkedList/SinglyLinkedList'
+import SinglyLinkedList from '../LinkedList/SinglyLinkedList'
 
 export default class LinkedListStack<T> implements Stack<T> {
   private _linkedList: LinkedList<T>
@@ -8,7 +8,7 @@ export default class LinkedListStack<T> implements Stack<T> {
   }
 
   // O(1)
-  push(data: T) {
+  push(data: T): void {
     this._linkedList.addFirst(data)
   }
 

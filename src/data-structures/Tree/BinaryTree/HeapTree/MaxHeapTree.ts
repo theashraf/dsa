@@ -71,7 +71,7 @@ export default class MaxHeapTree<T> implements HeapTree<T> {
     return i === 0
   }
 
-  private heapifyUp() {
+  private heapifyUp(): void {
     if (this.tree.size() === 1) return
 
     let i = this.tree.size() - 1
@@ -88,7 +88,7 @@ export default class MaxHeapTree<T> implements HeapTree<T> {
     }
   }
 
-  private heapifyDown() {
+  private heapifyDown(): void {
     if (this.tree.size() === 1) return
 
     let i = 0
@@ -104,7 +104,7 @@ export default class MaxHeapTree<T> implements HeapTree<T> {
   }
 
   // O(log N)
-  add(data: T) {
+  add(data: T): void {
     this.tree.add(this.tree.size(), data)
     this.heapifyUp()
   }

@@ -1,18 +1,5 @@
 import ArrayListQueue from '../../../Queue/ArrayListQueue'
 
-interface BinarySearchTree<T> {
-  insert(data: T): void
-  search(value: T): boolean
-  delete(value: T): void
-  min(): T
-  max(): T
-  height(): number
-  size(): number
-  isEmpty(): boolean
-  BFT(): void
-  DFT(type: 'preOrder' | 'inOrder' | 'postOrder'): void
-}
-
 class Node<T> {
   private d: T
   private r: Node<T>
@@ -311,15 +298,15 @@ export default class BST<T> implements BinarySearchTree<T> {
     return this.getHeight(this.root)
   }
 
-  size() {
+  size(): number {
     return this.s
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.s === 0
   }
 
-  BFT() {
+  BFT(): void {
     const q: Queue<Node<T>> = new ArrayListQueue<Node<T>>()
 
     q.enqueue(this.root)
@@ -341,7 +328,7 @@ export default class BST<T> implements BinarySearchTree<T> {
   }
 
   // root,left,right
-  private preOrder(node: Node<T>) {
+  private preOrder(node: Node<T>): void {
     if (!node) return
     console.log(node.data)
     this.preOrder(node.left)
@@ -349,7 +336,7 @@ export default class BST<T> implements BinarySearchTree<T> {
   }
 
   // left,root,right
-  private inOrder(node: Node<T>) {
+  private inOrder(node: Node<T>): void {
     if (!node) return
     this.inOrder(node.left)
     console.log(node.data)
@@ -357,14 +344,14 @@ export default class BST<T> implements BinarySearchTree<T> {
   }
 
   // left,right,root
-  private postOrder(node: Node<T>) {
+  private postOrder(node: Node<T>): void {
     if (!node) return
     this.postOrder(node.left)
     this.postOrder(node.right)
     console.log(node.data)
   }
 
-  DFT(type: string) {
+  DFT(type: string): void {
     switch (type) {
       case 'preOrder':
         this.preOrder(this.root)
@@ -380,36 +367,3 @@ export default class BST<T> implements BinarySearchTree<T> {
     }
   }
 }
-
-const t: BinarySearchTree<number> = new BST<number>()
-
-t.insert(12)
-t.insert(5)
-t.insert(15)
-t.insert(3)
-t.insert(7)
-t.insert(13)
-t.insert(17)
-t.insert(1)
-t.insert(9)
-t.insert(4)
-
-// console.log(t.max());
-// console.log(t.min());
-
-// console.log(t.size());
-// console.log(t.search(14));
-// console.log(t.height());
-
-// t.DFT("inOrder");
-t.BFT()
-
-// console.log("-----");
-
-t.delete(3)
-
-console.log('-----')
-
-t.BFT()
-
-// t.DFT("inOrder");

@@ -10,7 +10,7 @@ export default class ArrayQueue<T> implements Queue<T> {
   }
 
   // O(1)
-  enqueue(data: T) {
+  enqueue(data: T): void {
     if (this.isFull()) throw 'Queue is full'
     this.array[(this.f + this.s++) % this.array.length] = data
   }

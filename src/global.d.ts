@@ -57,3 +57,16 @@ declare interface HeapTree<T> {
   isEmpty(): boolean
   root(): T
 }
+
+declare interface BinarySearchTree<T> {
+  insert(data: T): void
+  search(value: T): boolean
+  delete(value: T): void
+  min(): T
+  max(): T
+  height(): number
+  size(): number
+  isEmpty(): boolean
+  BFT(): void
+  DFT(type: 'preOrder' | 'inOrder' | 'postOrder'): void
+}

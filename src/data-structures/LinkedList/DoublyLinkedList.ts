@@ -11,19 +11,19 @@ class Node<T> {
   public getData(): T {
     return this.data
   }
-  setData(data: T) {
+  setData(data: T): void {
     this.data = data
   }
   getNext(): Node<T> {
     return this.next
   }
-  setNext(next: Node<T>) {
+  setNext(next: Node<T>): void {
     this.next = next
   }
   getPrev(): Node<T> {
     return this.prev
   }
-  setPrev(prev: Node<T>) {
+  setPrev(prev: Node<T>): void {
     this.prev = prev
   }
 }
@@ -101,7 +101,7 @@ export default class DoublyLinkedList<T> implements LinkedList<T> {
     }
   }
   // O(n)
-  add(index: number, data: T) {
+  add(index: number, data: T): void {
     if (index < 0 || index > this.size()) throw 'Invalid Index'
     else if (index === 0) this.addFirst(data)
     else if (index === this.size()) this.addLast(data)

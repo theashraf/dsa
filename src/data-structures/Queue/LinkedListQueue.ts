@@ -2,22 +2,28 @@ import SinglyLinkedList from '../LinkedList/SinglyLinkedList'
 
 export default class LinkedListQueue<T> implements Queue<T> {
   private list: LinkedList<T>
+
   constructor() {
     this.list = new SinglyLinkedList()
   }
-  enqueue(data: T) {
+
+  enqueue(data: T): void {
     this.list.addLast(data)
   }
-  dequeue() {
+
+  dequeue(): T {
     return this.list.removeFirst()
   }
-  first() {
+
+  first(): T {
     return this.list.first()
   }
-  isEmpty() {
+
+  isEmpty(): boolean {
     return this.list.isEmpty()
   }
-  size() {
+
+  size(): number {
     return this.list.size()
   }
 }

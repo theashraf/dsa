@@ -1,4 +1,4 @@
-import ArrayList from 'data-structures/List/ArrayList'
+import ArrayList from '../List/ArrayList'
 
 class ArrayListStack<T> implements Stack<T> {
   private _list: ArrayList<T>

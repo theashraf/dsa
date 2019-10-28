@@ -13,7 +13,7 @@ class ArrayStack<T> implements Stack<T> {
   }
 
   // O(1)
-  push(data: T) {
+  push(data: T): void {
     if (this.isFull()) throw new Error('Error: Stack is full')
 
     this.array[++this._top] = data

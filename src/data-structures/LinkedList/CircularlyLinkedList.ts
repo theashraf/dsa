@@ -34,7 +34,7 @@ export default class CircularlyLinkedList<T> implements LinkedList<T> {
   }
 
   // O(1)
-  addFirst(data: T) {
+  addFirst(data: T): void {
     if (this.isEmpty()) {
       this.tail = new Node(data, null)
       this.tail.setNext(this.tail)
@@ -52,7 +52,7 @@ export default class CircularlyLinkedList<T> implements LinkedList<T> {
   }
 
   // O(1)
-  removeFirst() {
+  removeFirst(): T {
     if (this.isEmpty()) return null
     else if (this.size() === 1) {
       const temp: T = this.tail.getData()
@@ -144,7 +144,7 @@ export default class CircularlyLinkedList<T> implements LinkedList<T> {
   }
 
   // O(1)
-  rotate() {
+  rotate(): void {
     if (!this.isEmpty()) {
       this.tail = this.tail.getNext()
     }

@@ -9,43 +9,23 @@ export default class PriorityQueue<T> implements Queue<T> {
     this.tree = new MaxHeapTree(compareTo)
   }
 
-  enqueue(data: T) {
+  enqueue(data: T): void {
     this.tree.add(data)
   }
 
-  dequeue() {
+  dequeue(): T {
     return this.tree.remove()
   }
 
-  first() {
+  first(): T {
     return this.tree.root()
   }
 
-  size() {
+  size(): number {
     return this.tree.size()
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.tree.isEmpty()
   }
-}
-
-const compareTo: CompareFunction<number> = (num1: number, num2: number): number => {
-  if (num1 > num2) return 1
-  else if (num1 === num2) return 0
-  else {
-    return -1
-  }
-}
-
-const queue = new PriorityQueue<number>(compareTo)
-
-queue.enqueue(10)
-queue.enqueue(15)
-queue.enqueue(20)
-queue.enqueue(30)
-queue.enqueue(100)
-
-while (!queue.isEmpty()) {
-  console.log(queue.dequeue())
 }

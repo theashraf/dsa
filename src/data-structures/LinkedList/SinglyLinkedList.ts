@@ -20,26 +20,26 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
   }
 
   // O(1)
-  first() {
+  first(): E {
     if (this.isEmpty()) throw new Error('LinkedList is empty')
     return this.head.data
   }
 
   // O(1)
-  last() {
+  last(): E {
     if (this.isEmpty()) throw new Error('LinkedList is empty')
     return this.tail.data
   }
 
   // O(1)
-  addFirst(data: E) {
+  addFirst(data: E): void {
     if (this.isEmpty()) this.head = this.tail = new Node(data, null)
     else this.head = new Node(data, this.head)
     ++this.s
   }
 
   // O(1)
-  addLast(data: E) {
+  addLast(data: E): void {
     if (this.isEmpty()) this.head = this.tail = new Node(data, null)
     else {
       const newNode = new Node(data, null)
@@ -50,7 +50,7 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
   }
 
   // O(1)
-  removeFirst() {
+  removeFirst(): E {
     if (this.isEmpty()) return null
     else {
       const data = this.head.data
@@ -60,7 +60,7 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
     }
   }
 
-  add(index: number, data: E) {
+  add(index: number, data: E): void {
     if (index < 0 || index > this.size()) throw 'Invalid Index'
     else if (index === 0) this.addFirst(data)
     else if (index === this.size()) this.addLast(data)
@@ -74,7 +74,7 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
     }
   }
 
-  remove(index: number) {
+  remove(index: number): E {
     if (index < 0 || index >= this.size()) throw 'Invalid Index'
     else if (index === 0) {
       return this.removeFirst()
@@ -91,7 +91,7 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
   }
 
   // O(n)
-  get(index: number) {
+  get(index: number): E {
     if (index < 0 || index >= this.size()) throw 'Invalid Index'
     else if (index === 0) {
       return this.first()
@@ -107,29 +107,29 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
   }
 
   // O(1)
-  size() {
+  size(): number {
     return this.s
   }
 
   // O(1)
-  isEmpty() {
+  isEmpty(): boolean {
     return this.s === 0
   }
 
-  private printNode(node: Node<E>) {
+  private printNode(node: Node<E>): void {
     if (!node) return
 
     console.log(node.data)
 
     this.printNode(node.next)
   }
-  print() {
+  print(): void {
     if (this.isEmpty()) return
 
     this.printNode(this.head)
   }
 
-  printIteratively() {
+  printIteratively(): void {
     if (this.isEmpty()) return
 
     let current: Node<E> = this.head
@@ -139,20 +139,20 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
     }
   }
 
-  private reversedPrintNode(node: Node<E>) {
+  private reversedPrintNode(node: Node<E>): void {
     if (!node) return
 
     this.reversedPrintNode(node.next)
 
     console.log(node.data)
   }
-  reversedPrint() {
+  reversedPrint(): void {
     if (this.isEmpty()) return
 
     this.reversedPrintNode(this.head)
   }
 
-  private reverseList(node: Node<E>) {
+  private reverseList(node: Node<E>): void {
     if (!node.next) {
       this.head = node
       return
@@ -164,13 +164,13 @@ export default class SinglyLinkedList<E> implements LinkedList<E> {
     nxt.next = node
     node.next = null
   }
-  reverse() {
+  reverse(): void {
     if (this.isEmpty()) return
 
     this.reverseList(this.head)
   }
 
-  reverseIteratively() {
+  reverseIteratively(): void {
     if (this.isEmpty()) return
 
     let current: Node<E> = this.head
