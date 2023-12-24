@@ -1,5 +1,5 @@
 {
-  "name": "dsa",
+  "name": "dsa-ts",
   "version": "1.0.0",
   "description": "Data Structures and Algorithms in TypeScript",
   "main": "index.js",

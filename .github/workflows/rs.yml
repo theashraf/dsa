@@ -1,0 +1,29 @@
+name: rust
+on: [push, pull_request]
+jobs:
+  validate:
+    name: validate rs
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rs
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.12.0
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Rust
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          export PATH="$HOME/.cargo/bin:$PATH"
+
+      - name: 🏗 Build
+        run: cargo build --release
+
+      - name: 🔍 Lint
+        run: cargo clippy -- -D warnings
+
+      - name: 🛡️ Test
+        run: cargo test
