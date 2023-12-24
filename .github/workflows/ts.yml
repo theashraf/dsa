@@ -1,34 +1,42 @@
 name: ts
 on: [push, pull_request]
 jobs:
-  run:
-    name: Run
+  validate:
+    name: validate ts
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ts
     steps:
-      - uses: actions/checkout@v4
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.12.0
 
-      - name: Setup Node 18.x
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup pnpm v8
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: 📦 Setup Node.js v18
         uses: actions/setup-node@v4
         with:
-          node-version: 18.x
-          cache: "pnpm"
+          node-version: 18
 
-      - name: Install
-        run: npm install
+      - name: 📥 Download deps
+        run: pnpm install
 
-      - name: Lint
-        run: pnpm lint
-
-      - name: Build
+      - name: 🏗 Build
         run: pnpm build
 
-      - name: Test
+      - name: 🔍 Lint
+        run: pnpm lint
+
+      - name: 🛡️ Test
         run: CI=true pnpm test -- --coverage
 
-      - name: Coverage Report
+      - name: 📊 Coverage
         uses: codecov/codecov-action@v3
         with:
           token: ${{secrets.CODECOV_TOKEN}}
