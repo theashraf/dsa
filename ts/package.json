@@ -1,12 +1,12 @@
 {
   "name": "dsa",
   "version": "1.0.0",
-  "description": "> Data Structures and Algorithms implemented in Typescript",
+  "description": "Data Structures and Algorithms in TypeScript",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "compile": "tsc",
+    "build": "tsc",
     "lint": "eslint src/ --ext ts",
     "format": "prettier --write \"**/*.+(ts|js|md|json)\"",
     "commit": "git-cz"

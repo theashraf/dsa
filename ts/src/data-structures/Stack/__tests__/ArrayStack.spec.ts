@@ -1,4 +1,4 @@
-import { ArrayStack } from '../'
+import { ArrayStack } from '..'
 
 let stack: Stack<number>
 
