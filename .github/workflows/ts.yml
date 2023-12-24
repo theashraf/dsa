@@ -14,7 +14,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.x
-          cache: 'pnpm'
+          cache: "pnpm"
 
       - name: Install
         run: npm install
@@ -29,6 +29,6 @@ jobs:
         run: CI=true pnpm test -- --coverage
 
       - name: Coverage Report
-        uses: codecov/codecov-action@v1.0.3
+        uses: codecov/codecov-action@v3
         with:
           token: ${{secrets.CODECOV_TOKEN}}
